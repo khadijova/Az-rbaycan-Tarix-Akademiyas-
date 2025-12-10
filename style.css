@@ -1,13 +1,13 @@
+/* Rənglər və Əsas Parametrlər */
 :root {
-    /* Rəng Palitrası */
-    --primary-color: #003366; /* Tünd Göy (Header/Əsas fon rəngi) */
-    --accent-color: #C5B358; /* Qızılı/Bürünc (Vurğu/Düymələr/Bot mesajı) */
+    --primary-color: #003366; /* Tünd Göy */
+    --accent-color: #C5B358; /* Qızılı/Bürünc */
     --text-color: #333;
-    --bg-color: #f4f4f9; /* Ümumi fon */
+    --bg-color: #f4f4f9; /* Ümumi açıq fon */
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', Arial, sans-serif; /* Daha professional şrift */
     background-color: var(--bg-color);
     margin: 0;
     display: flex;
@@ -23,7 +23,7 @@ header {
     color: white;
     padding: 15px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Daha kəskin kölgə */
 }
 
 .logo-container {
@@ -43,8 +43,8 @@ header {
     width: 100%;
     max-width: 800px;
     background: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08); /* Yumşaq, zərif kölgə */
+    border-radius: 12px; /* Daha yuvarlaq künclər */
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -55,7 +55,7 @@ header {
 #messages {
     flex-grow: 1;
     padding: 20px;
-    overflow-y: auto; /* Scroll üçün */
+    overflow-y: auto;
     max-height: 60vh;
 }
 
@@ -66,38 +66,45 @@ header {
     border-radius: 18px;
     max-width: 70%;
     clear: both;
-    position: relative; /* Şəkilin yerləşməsi üçün */
+    position: relative;
+    line-height: 1.5; /* Oxumağı asanlaşdırır */
 }
 
+/* İstifadəçi Mesajı */
 .user-message {
-    background-color: #e0e0e0;
+    background-color: #e8eaf6; /* Yumşaq, açıq göy fon */
     float: right;
     margin-left: auto;
+    color: var(--text-color);
 }
 
+/* Bot Mesajı (Daha professional vurğu) */
 .bot-message {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+    background-color: #f7f3e8; /* Çox açıq qızılı fon */
+    color: var(--primary-color); /* Mətn Tünd Göy */
     float: left;
     margin-right: auto;
+    border: 1px solid var(--accent-color); /* Qızılı rəngdə incə sərhəd */
 }
 
-/* Şəxsiyyət Şəklinin Stili (yeni əlavə) */
+/* Şəxsiyyət Şəklinin Stili */
 .person-image {
     width: 100px; 
     height: 100px;
-    border-radius: 50%; /* Dairəvi şəkil üçün */
+    border-radius: 50%; /* Dairəvi şəkil */
     object-fit: cover;
     margin-bottom: 10px;
     display: block;
-    border: 3px solid var(--primary-color);
+    border: 3px solid var(--accent-color); /* Çərçivə rəngi */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Yumşaq kölgə */
 }
 
 /* Input Sahəsi Stili */
 .input-container {
     display: flex;
     padding: 15px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #e0e0e0; /* Açıq rəngdə ayırıcı xətt */
+    background-color: white; 
 }
 
 #user-input {
@@ -107,6 +114,12 @@ header {
     border-radius: 5px;
     font-size: 16px;
     margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+#user-input:focus {
+    border-color: var(--primary-color); /* Fokus zamanı tünd göy çərçivə */
+    outline: none;
 }
 
 #send-btn {
@@ -117,9 +130,13 @@ header {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
 }
 
 #send-btn:hover {
-    background-color: #004d99; /* Tündləşmiş göy */
+    background-color: #004d99; 
+}
+
+#send-btn:active {
+    transform: scale(0.98); /* Kliklənəndə kiçik animasiya */
 }
