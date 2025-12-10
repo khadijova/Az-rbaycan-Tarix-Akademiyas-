@@ -3,20 +3,34 @@
 // =========================================================
 
 const SHEKSIYYETLER = {
-    // Məhəmməd Əmin Rəsulzadə haqqında geniş məlumat
+    // 1. Məhəmməd Əmin Rəsulzadə
     "ME HEMMED EMIN RESULZADE": {
         ad: "Məhəmməd Əmin Rəsulzadə",
         dogum: "1884, Novxanı",
         vefat: "1955, Ankara",
-        fealiyyet: "Siyasətçi, Publisist, Dramaturq, Dövlət xadimi",
-        partiya: "Müsavat Partiyası (1913-cü ildən lider)",
+        fealiyyet: "Siyasətçi, Publisist, Dövlət xadimi",
+        partiya: "Müsavat Partiyası",
         axc_rolu: "Azərbaycan Milli Şurasının sədri (1918). İstiqlal Bəyannaməsinin qəbul edilməsində əsas rol.",
         shuarlar: "Bir kərə yüksələn bayraq, bir daha enməz!",
         ideologiya: "Türkçülük, İslamçılıq və Müasirlik",
         eserler: "Azərbaycan Cümhuriyyəti, Əsrimizin Səyavuşu",
         sekil: "/Az-rbaycan-Tarix-Akademiyas-/ATA logo.png" // Test şəkli
     },
-    // ... Digər şəxsiyyətlər bura əlavə ediləcək ...
+
+    // 2. ŞAH İSMAYIL XƏTAİ
+    "ŞAH İSMAYIL XETAI": {
+        ad: "Şah İsmayıl Xətai",
+        dogum: "25 İyul 1487, Ərdəbil",
+        vefat: "1524",
+        fealiyyet: "Hökmdar (Şah), Səfəvilər dövlətinin qurucusu, Şair",
+        sülalə: "Səfəviyyə (Səfəvi Dövləti)",
+        nailiyyetler: "1501-ci ildə Təbrizdə taxta çıxdı. Azərbaycan tarixində ilk mərkəzləşmiş şiə dövlətini qurdu. Xorasanı (Mərv döyüşü, 1510) və Bağdadı (1508) fəth etdi.",
+        esas_hadise: "Çaldıran döyüşü (1514) və Səfəvi-Osmanlı qarşıdurması.",
+        paytaxt: "Təbriz",
+        mexseb: "Şiəlik (Cəfəri Məzhəbi)",
+        qızılbaşlar: "Şamlı, Rumlu, Ustaclı, Təkəli, Qacar, Varsaq, Zülqədər tayfalarının dəstəyi.",
+        sekil: null 
+    }
 };
 
 const HADISELER = {
@@ -50,16 +64,16 @@ const HADISELER = {
     },
     "ESRIN MUQAVILESİ": {
         ad: "Əsrin Müqaviləsi",
-        tarix: "20 Sentyabr 1994", // Əlavə olundu
-        kateqoriya: "Neft, İqtisadi Saziş", // Əlavə olundu
-        tesvir: "Bakı 'Deepwater' yatağının inkişafı üçün Azərbaycan Dövlət Neft Şirkəti (SOCAR) ilə 11 beynəlxalq neft şirkəti arasında imzalanmış geniş neft sazişi. Azərbaycanın iqtisadi müstəqilliyində əsas rol oynadı.", // Əlavə olundu
-        terefler: "Azərbaycan (Heydər Əliyev), BP, Amoco, Pennzoil və s. 11 beynəlxalq şirkət" // Əlavə olundu
+        tarix: "20 Sentyabr 1994", 
+        kateqoriya: "Neft, İqtisadi Saziş", 
+        tesvir: "Bakı 'Deepwater' yatağının inkişafı üçün Azərbaycan Dövlət Neft Şirkəti (SOCAR) ilə 11 beynəlxalq neft şirkəti arasında imzalanmış geniş neft sazişi. Azərbaycanın iqtisadi müstəqilliyində əsas rol oynadı.", 
+        terefler: "Azərbaycan (Heydər Əliyev), BP, Amoco, Pennzoil və s. 11 beynəlxalq şirkət" 
     },
     // ... Digər hadisələr bura əlavə ediləcək ...
 };
 
 // =========================================================
-// Axtarış və Cavab Məntiqi (Yenidən Yazılmışdır)
+// Axtarış və Cavab Məntiqi (Kontekstual Məntiq)
 // =========================================================
 
 // Əsas elementləri seçirik
@@ -67,7 +81,7 @@ const inputElement = document.getElementById('user-input');
 const sendButton = document.getElementById('send-btn');
 const messagesContainer = document.getElementById('messages');
 
-// Mesajı Chat pəncərəsinə əlavə edən funksiya (dəyişmədi)
+// Mesajı Chat pəncərəsinə əlavə edən funksiya
 function appendMessage(text, type, imageUrl = null) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', type);
@@ -88,7 +102,7 @@ function appendMessage(text, type, imageUrl = null) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// İstifadəçi sual verdikdə işə düşəcək əsas funksiya (dəyişmədi)
+// İstifadəçi sual verdikdə işə düşəcək əsas funksiya
 function sendMessage() {
     const userQuestion = inputElement.value.trim();
     if (userQuestion === "") {
@@ -105,40 +119,85 @@ function simulateBotResponse(question) {
     let botText = null;
     let image = null;
 
-    // --- ŞƏXSİYYƏT AXTARIŞI ---
+    // ----------------------------------------------------
+    // 1. ŞƏXSİYYƏT AXTARIŞI: Məhəmməd Əmin Rəsulzadə
+    // ----------------------------------------------------
     if (normalizedQuestion.includes('rəsulzadə') || normalizedQuestion.includes('axc banisi') || normalizedQuestion.includes('müsavat')) {
         const data = SHEKSIYYETLER["ME HEMMED EMIN RESULZADE"];
         if (data) {
-            botText = `Bəli, ${data.ad} (Doğum: ${data.dogum}) Azərbaycan Milli Şurasının sədri olmuşdur. Onun siyasi ideologiyası "${data.ideologiya}" prinsiplərinə əsaslanırdı. Ən məşhur şüarı: "${data.shuarlar}".`;
+            
+            // Xüsusi Kontekstual Suallar üçün DİNAMİK CAVABLAR
+            if (normalizedQuestion.includes('şüar') || normalizedQuestion.includes('məşhur söz')) {
+                botText = `Məhəmməd Əmin Rəsulzadənin ən məşhur şüarı: "${data.shuarlar}". Bu şüar Azərbaycanın müstəqillik simvoludur.`;
+            } else if (normalizedQuestion.includes('partiya') || normalizedQuestion.includes('lider')) {
+                botText = `${data.ad} ${data.partiya} partiyasının lideri olmuşdur. O, həmçinin ${data.axc_rolu}nda mühüm rol oynamışdır.`;
+            } else {
+                // Ümumi cavab
+                botText = `${data.ad} (Doğum: ${data.dogum}) Azərbaycan Xalq Cümhuriyyətinin banisidir. Onun ideologiyası "${data.ideologiya}" prinsiplərinə əsaslanırdı.`;
+            }
             image = data.sekil;
         }
     }
     
-    // --- HADİSƏ AXTARIŞI ---
-    else if (normalizedQuestion.includes('gülüstan') || normalizedQuestion.includes('1813')) {
-        const data = HADISELER["GULUSTAN MUQAVILESİ"];
-        botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). ${data.tesvir} Əsas tərəflər: ${data.terefler}.`;
-    } 
-    else if (normalizedQuestion.includes('türkmənçay') || normalizedQuestion.includes('1828')) {
-        const data = HADISELER["TURKMENCAY MUQAVILESİ"];
-        botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). ${data.tesvir} Bu müqavilə Azərbaycanın bölünməsini rəsmiləşdirdi.`;
+    // ----------------------------------------------------
+    // 2. ŞƏXSİYYƏT AXTARIŞI: Şah İsmayıl Xətai
+    // ----------------------------------------------------
+    else if (normalizedQuestion.includes('şah ismayıl') || normalizedQuestion.includes('xətai') || normalizedQuestion.includes('səfəvi')) {
+        const data = SHEKSIYYETLER["ŞAH İSMAYIL XETAI"];
+        if (data) {
+            
+            // Xüsusi Kontekstual Suallar üçün DİNAMİK CAVABLAR
+            if (normalizedQuestion.includes('çaldıran')) {
+                botText = `Şah İsmayılın siyasi tarixində ən çətin məqam 1514-cü ildə Osmanlı ilə baş verən Çaldıran döyüşü oldu. Bu döyüşdə Səfəvilər məğlub olsalar da, dövlət dağılmadı.`;
+            } else if (normalizedQuestion.includes('dövləti necə qurub') || normalizedQuestion.includes('nailiyyət')) {
+                botText = `Şah İsmayıl 1501-ci ildə Təbrizdə taxta çıxaraq Səfəvilər dövlətini qurdu. Ən böyük nailiyyətlərindən biri kimi ${data.nailiyyetler} fəthini qeyd etmək olar.`;
+            } else {
+                // Ümumi cavab
+                botText = `${data.ad} (Sülalə: ${data.sülalə}) Səfəvilər dövlətinin qurucusu, həm də istedadlı bir şair idi. O, şiəliyi rəsmi məzhəb elan etmişdir.`;
+            }
+            image = data.sekil;
+        }
     }
-    else if (normalizedQuestion.includes('axc elanı') || normalizedQuestion.includes('28 may')) {
-        const data = HADISELER["AXC ELANI"];
-        botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). ${data.tesvir} AXC Şərqdə ilk demokratik respublika idi.`;
+    
+    // ----------------------------------------------------
+    // 3. HADİSƏ AXTARIŞI: Gülüstan və Türkmənçay (Bölünmə)
+    // ----------------------------------------------------
+    else if (normalizedQuestion.includes('bölünmə') || normalizedQuestion.includes('iki hissəyə') || normalizedQuestion.includes('iranla müqavilə')) {
+        
+        const gulustan = HADISELER["GULUSTAN MUQAVILESİ"];
+        const turkmencay = HADISELER["TURKMENCAY MUQAVILESİ"];
+        
+        botText = `Azərbaycanın tarixi bölünməsi iki əsas müqavilə ilə rəsmiləşib: ${gulustan.ad} (${gulustan.tarix}) və ${turkmencay.ad} (${turkmencay.tarix}). Türkmənçay Müqaviləsi ilə Araz çayı sərhəd təyin edildi.`;
     }
-    else if (normalizedQuestion.includes('20 yanvar') || normalizedQuestion.includes('qara yanvar')) {
-        const data = HADISELER["20 YANVAR"];
-        botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). ${data.tesvir}`;
-    }
-    else if (normalizedQuestion.includes('əsrin müqaviləsi') || normalizedQuestion.includes('1994')) {
+    
+    // ----------------------------------------------------
+    // 4. HADİSƏ AXTARIŞI: Əsrin Müqaviləsi
+    // ----------------------------------------------------
+    else if (normalizedQuestion.includes('əsrin müqaviləsi') || normalizedQuestion.includes('1994') || normalizedQuestion.includes('neft')) {
         const data = HADISELER["ESRIN MUQAVILESİ"];
-        botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). Kateqoriya: ${data.kateqoriya}. ${data.tesvir}`;
+        if (normalizedQuestion.includes('kimlər imzalayıb') || normalizedQuestion.includes('tərəflər')) {
+             botText = `Əsrin Müqaviləsini Azərbaycan Dövlət Neft Şirkəti (SOCAR) ilə ${data.terefler} arasında imzalanıb.`;
+        } else {
+            botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). Kateqoriya: ${data.kateqoriya}. ${data.tesvir}`;
+        }
     }
-
-    // 3. Əgər cavab tapılmayıbsa, standart cavab ver
-    if (!botText) {
-        botText = "Təəssüf ki, bu sorğu üzrə ətraflı məlumat bazamızda hələlik mövcud deyil. Zəhmət olmasa, Gülüstan, Türkmənçay, AXC Elanı, 20 Yanvar, Əsrin Müqaviləsi və ya Rəsulzadə haqqında sorğu göndərin.";
+    
+    // 5. Əgər yuxarıdakı açar sözlər yoxdursa, Ümumi Sual Yoxlanışı
+    
+    else {
+        // Mövcud hadisələr üzrə sadə axtarış
+        let found = false;
+        for (const key in HADISELER) {
+            const data = HADISELER[key];
+            if (normalizedQuestion.includes(data.ad.toLowerCase()) || normalizedQuestion.includes(data.tarix.toLowerCase().replace(/[^a-z0-9]/g, ''))) {
+                botText = `Tarixi Hadisə: ${data.ad} (${data.tarix}). Kateqoriya: ${data.kateqoriya}. ${data.tesvir}`;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            botText = "Təəssüf ki, sorğunuz üzrə dəqiq kontekstual məlumat bazamızda hələlik mövcud deyil. Zəhmət olmasa, Rəsulzadə, Şah İsmayıl, Gülüstan, Türkmənçay, AXC Elanı, 20 Yanvar, Əsrin Müqaviləsi kimi açar sözlərdən istifadə edin.";
+        }
     }
 
     // 4. Cavabı ekrana əlavə et (500ms gecikmə ilə)
